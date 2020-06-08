@@ -1,24 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
+import React,{useState} from 'react';
+import {Modal} from './components/Modal';
 import './App.css';
 
 function App() {
+  const [open, setOpen] = useState(false);
+  const [data, setData] = useState({
+    creditAmount: 0,
+    payment_type: {},
+    supportFiles: null
+  });
+
+  const handleSubmit = () => {
+    console.log("handleSUbmit in parent called");
+    console.log(data);
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <button type="button" className="btn btn-primary" onClick={()=>setOpen(true) }>
+            Launch demo modal
+        </button>
+        {
+          open && (
+            <Modal setOpen={setOpen} setData={setData} data={data} handleSubmit={handleSubmit} />
+          )
+        }
+      
     </div>
   );
 }
